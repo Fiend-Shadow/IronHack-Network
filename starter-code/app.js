@@ -1,17 +1,19 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
 
-var router = require('./routes/index');
+const router = require('./routes/index');
+const dbName = "IronHack-Network";
+const PORT = 3000;
 
 
-var app = express();
+const app = express();
 
 mongoose.connect(`mongodb://localhost:${PORT}/${dbName}`, {
   useNewUrlParser: true,

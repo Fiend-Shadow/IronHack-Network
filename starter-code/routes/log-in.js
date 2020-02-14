@@ -7,7 +7,7 @@ const User = require("./../models/users");
 logInRouter.post("/",(req,res,next) => {
     const { username , password} = req.body;
 
-    if (password ===""|| username === ""){
+    if (password === "" || username === ""){
         res.render("log-in",{errorMessage:"Username and Password are requiered !"});
         return;
     }

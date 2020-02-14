@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
-console.log('in dev');
+// console.log('in dev');
 
 
 const router = require('./routes/index');

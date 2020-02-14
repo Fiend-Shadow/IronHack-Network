@@ -28,51 +28,52 @@ List of other features outside of the MVPs scope:
   - renders the sign-up (form) page
 
 - POST /sign-up
-  - renders the log-in (form) page
   - body:
     - userName
     - password
     - cohort_name
     - cohort_date
     - city
+  - create new user object
+  - renders the user-interface page 
 
 - GET /log-in
   - renders the log-in (form) page
 
 - POST /log-in
-  - renders the user-interface page
   - body:
     - userName
     - password
+  - if ok: renders the user-interface page
+  - if Nok: renders the log-in (form) page
 
 - GET /user-interface
   - renders the user-interface page
 
 - POST /user-interface
-  - renders the user-interface page
   - body:
     - postContent
     - postImg_url
+  - create new post
+  - renders the user-interface page
 
 - GET /user-profil
   - renders the user-profil page
 
 - POST /user-profil
-  - renders the user-profil page
   - body:
     - links
     - postContent
     - postImg_url
+  - Update User (link)
+  - Update post (postContent, postImg_url)
+  - renders the user-profil page
 
 - GET /user-contact-interface
   - renders the user-contact-interface page
 
 - POST /user-contact-interface
-  - renders the user-contact-interface page
-  - body:
-    - links
-    - postContent
-    - postImg_url
+    N.A
 
 ## Api-Routes
 

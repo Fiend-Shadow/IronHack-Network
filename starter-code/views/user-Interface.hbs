@@ -2,7 +2,7 @@
 <h1>User interface view</h1>
 
 
-
+{{!-- User data --}}
 <div>{{userdata.userName}}</div>
 {{!-- <div>{{userdata.isAdmin}}</div> --}}
 <img src="{{userdata.image_url}}" alt="userImage">
@@ -14,7 +14,7 @@
 </ul>
 
 
-
+{{!-- post Form --}}
 <form action='/user-interface' method='POST'>
 
   <label for=''>postContent</label>
@@ -23,6 +23,15 @@
   <button type='submit'>Submit</button>
 </form>
 
+{{!-- post Partials --}}
+<div >
+    {{!-- posts to be send by find by ...? from user interface  route --}}
+    {{#each posts}}          
+        {{> post this}}
+    {{/each}}
+</div>
+
+{{!-- error --}}
 {{#if errorMessage}}
 <p>{{errorMessage}}</p>
 {{/if}}

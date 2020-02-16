@@ -1,0 +1,13 @@
+<h1>User interface view</h1>
+<div>{{userdata.userName}}</div>
+<div>{{userdata.isAdmin}}</div>
+<img src="{{userdata.image_url}}" alt="userImage">
+{{#each userdata.links}}
+<a href="{{this.url}}"></a>
+{{/each}}
+<a href="/logout">Logout</a>
+{{!-- <form action='/user-interface' method='POST'>
+  <label for=''>postContent</label>
+  <input type='text' name='postContent'>
+  <button type='submit'>Submit</button>
+</form> --}}

@@ -4,16 +4,28 @@ const Cohort = require("./../models/cohorts");
 const dbName = "IronHack-Network";
 
 const cohorts = [{
-        cohort_name: "webDev",
+        cohort_name: "WebDev",
         cohort_date:"2020-01-01",
         
-        members:["5e4563a0bdbd9c781c5212c7", "5e4563a0bdbd9c781c5212ca" ]
+        members:[]
 },
 {
     cohort_name: "UX/UI",
     cohort_date:"2020-01-01",
     
-    members:["5e4563a0bdbd9c781c5212d0","5e4563a0bdbd9c781c5212cd" ]   
+    members:[]   
+},
+{
+  cohort_name: "WebDev",
+  cohort_date:"2020-04-01",
+  
+  members:[]
+},
+{
+cohort_name: "UX/UI",
+cohort_date:"2020-04-01",
+
+members:[ ]   
 }]
 
 mongoose.connect(`mongodb://localhost/${dbName}`, {useNewUrlParser: true, useUnifiedTopology: true})

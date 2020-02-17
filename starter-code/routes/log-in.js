@@ -17,9 +17,7 @@ logInRouter.post("/",(req,res,next) => {
         const passwordCorrect = bcrypt.compareSync(password, passwordFromDb);
          if (passwordCorrect){
              req.session.currentUser = user;
-             res.render("user-interface",{userdata:user});
-            //  console.log('{userdata:user}');
-             
+             res.redirect("user-interface");
          }
          else {
              res.render("log-in", {errorMessage: "Incorrect password!"});

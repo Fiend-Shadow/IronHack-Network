@@ -1,8 +1,25 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  color: #000;
+  overflow-x: hidden;
+  height: 100vh;
+  
 }
 
-a {
-  color: #00B7FF;
+
+.main-header{
+  width: 100vw;
+  height: 5em;
+  background-color: #4FC6F9;
+}
+
+footer{
+  height :5em;
+  position: fixed;
+  bottom: 0em;
+  background-color: #4FC6F9;
+  width: 100vw;
+}
+.logo-img{
+  height: 100%;
 }

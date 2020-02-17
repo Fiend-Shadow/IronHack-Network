@@ -33,9 +33,10 @@ function isLoggedIn(req, res, next) {
 
 userInterfaceRouter
     .post('/', (req, res, next) => {
-        const {postContent} = req.body;
+        const {postContent , image_url , currentUser} = req.body;
 
-        User.create({postContent: postContent})
+
+        Post.create({postContent: postContent, userId: currentUser._id })
         .then((createdPost) => {
               res.redirect("user-interface");           
         }).catch((err) => {

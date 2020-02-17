@@ -3,12 +3,12 @@
 
 
 {{!-- User data --}}
-<div>{{userdata.userName}}</div>
+<div>{{user.userName}}</div>
 {{!-- <div>{{userdata.isAdmin}}</div> --}}
-<img src="{{userdata.image_url}}" alt="userImage">
+<img src="{{user.image_url}}" alt="userImage">
 
 <ul>
-    {{#each userdata.links}}
+    {{#each user.links}}
         <li><a href="{{this.url}}">{{this.description}}</a></li>
     {{/each}}
 </ul>
@@ -20,8 +20,14 @@
   <label for=''>postContent</label>
   <input type='text' name='postContent'>
 
+  <button type="submit">Add photo</button>
+
   <button type='submit'>Submit</button>
 </form>
+{{#if errorMessage}}
+<p>{{errorMessage}}</p>
+{{/if}}
+
 
 {{!-- post Partials --}}
 <div >
@@ -32,9 +38,6 @@
 </div>
 
 {{!-- error --}}
-{{#if errorMessage}}
-<p>{{errorMessage}}</p>
-{{/if}}
 
 
 

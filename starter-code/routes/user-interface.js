@@ -8,7 +8,6 @@ const Cohort = require ('./../models/cohorts');
 
 function isLoggedIn(req, res, next) {
     if (req.session.currentUser) next();
-<<<<<<< HEAD
     else res.redirect("/login");
   }
 
@@ -17,13 +16,6 @@ function isLoggedIn(req, res, next) {
   });
 
 
-=======
-    else res.redirect("/log-in");
-  }
-  userInterfaceRouter.get("/", isLoggedIn, (req, res) => {
-    res.render("user-interface");
-  });
->>>>>>> c75b08b1a9b62e7534ef20e2c08a54f879c469a3
 // userInterfaceRouter.use((req,res,next) => {
 //     if (req.session.currentUser) {
 //         next();
@@ -32,15 +24,10 @@ function isLoggedIn(req, res, next) {
 //         res.redirect("/login");
 //     }
 // });
-<<<<<<< HEAD
-
-=======
->>>>>>> c75b08b1a9b62e7534ef20e2c08a54f879c469a3
 // userInterfaceRouter
 //     .get('/', (req,res,next) => {
 //         res.render('user-interface')
 //     });
-<<<<<<< HEAD
 
 
 userInterfaceRouter
@@ -59,23 +46,16 @@ userInterfaceRouter
 
     });
 
-=======
-// userInterfaceRouter
-//     .post('/', (req, res, next) => {
-//     });
->>>>>>> c75b08b1a9b62e7534ef20e2c08a54f879c469a3
+
 userInterfaceRouter.get("/logout", (req, res, next) => {
     req.session.destroy((err) => {
       // cannot access session here
       res.render("log-in");
     });
   });
-<<<<<<< HEAD
+
 
 
 
 
 module.exports = userInterfaceRouter;
-=======
-module.exports = userInterfaceRouter;
->>>>>>> c75b08b1a9b62e7534ef20e2c08a54f879c469a3

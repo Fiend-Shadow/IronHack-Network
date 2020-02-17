@@ -6,6 +6,7 @@ const logger = require('morgan');
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
+const hbs = require("hbs");
 
 // console.log('in dev');
 

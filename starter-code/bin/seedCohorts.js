@@ -4,7 +4,7 @@ const Cohort = require("./../models/cohorts");
 const dbName = "IronHack-Network";
 
 const cohorts = [{
-        cohort_name: "webDev",
+        cohort_name: "WebDev",
         cohort_date:"2020-01-01",
         
         members:[]
@@ -16,7 +16,7 @@ const cohorts = [{
     members:[]   
 },
 {
-  cohort_name: "webDev",
+  cohort_name: "WebDev",
   cohort_date:"2020-04-01",
   
   members:[]

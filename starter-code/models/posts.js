@@ -6,7 +6,7 @@ postSchema = new Schema(
     {
         postContent: {type: String, required: true},
         postImg_url: {type: String},
-        userId: {type: Schema.Types.ObjectId, ref: "User"}
+        userId: {type: Schema.Types.ObjectId, ref: "User", required:true }
     },
     
     {

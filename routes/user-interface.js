@@ -16,8 +16,30 @@ function isLoggedIn(req, res, next) {
 
     User.findById({_id})
     .then((loggedInUser) => {
+      const cohortDate = loggedInUser.cohortDate;
       
-      res.render("user-interface",{loggedInUser});
+      Cohort.findOne({_id:cohortDate})
+      
+      .then((currentCohort) => {
+      
+
+        let colleagues = currentCohort.members;
+           
+        colleagues.forEach((m)=>{
+        
+          Post.find({userId : m})
+        
+          .then((postedByUserId) => {
+        
+            const {postContent , postImg_url} = postedByUserId;
+        
+            res.render("user-interface",{user:loggedInUser, posts:{postContent,postImg_url} });
+        
+          })
+        
+        })
+      
+      }) 
     }).catch((err) => {
       console.log(err);
     });
@@ -37,8 +59,35 @@ userInterfaceRouter
 
 
         Post.create({postContent: postContent, postImg_url: image_url, userId: {_id} })
+
         .then((createdPost) => {
-              res.redirect("user-interface");           
+        
+          const userIdFormCreatedPost= createdPost.userId;
+        
+          User.findById({_id: userIdFormCreatedPost})
+        
+          .then((userPosting) => {
+        
+            const postForiegnKey = userPosting.postIds;
+        
+            postForiegnKey.push(createdPost._id);
+        
+            User.updateOne({_id:userPosting._id}, {$set: {postIds:postForiegnKey}})
+        
+            .then((result) => {
+        
+              res.redirect("user-interface"); 
+        
+            })
+              
+            
+
+           
+          }).catch((err) => {
+            
+          });
+
+                        
         }).catch((err) => {
             console.log(err);
             res.render("user-interface", {errorMessage : "Error while creating the new post"})

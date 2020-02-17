@@ -2,10 +2,10 @@
 <h1>User interface view</h1>
 
 
-{{!-- User data --}}
-<div>{{user.userName}}</div>
-{{!-- <div>{{userdata.isAdmin}}</div> --}}
-<img src="{{user.image_url}}" alt="userImage">
+
+<div>{{loggedInUser.userName}}</div>
+
+<img src="{{loggedInUser.image_url}}" alt="userImage">
 
 <ul>
     {{#each user.links}}
@@ -28,16 +28,6 @@
 <p>{{errorMessage}}</p>
 {{/if}}
 
-
-{{!-- post Partials --}}
-<div >
-    {{!-- posts to be send by find by ...? from user interface  route --}}
-    {{#each posts}}          
-        {{> post this}}
-    {{/each}}
-</div>
-
-{{!-- error --}}
 
 
 

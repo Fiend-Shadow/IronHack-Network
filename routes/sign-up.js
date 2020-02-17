@@ -44,7 +44,7 @@ signUpRouter.post("/",(req,res,next) => {
                             const cohortMembers=cohortFromDb.members;
                             cohortMembers.push(createdUser._id);
                             Cohort.updateOne({_id :cohortFromDb._id }, {$set:{members : cohortMembers}})
-                            .then((result) => {
+                            .then(() => {
                                 req.session.currentUser = createdUser;
                               res.redirect("user-interface");    
                             }).catch((err) => {

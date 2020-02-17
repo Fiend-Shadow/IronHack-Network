@@ -12,13 +12,13 @@ const hbs = require("hbs");
 
 
 const router = require('./routes/index');
-const dbName = "IronHack-Network";
-const PORT = 3000;
 
+
+require("dotenv").config();
 
 const app = express();
 
-mongoose.connect(`mongodb://localhost:/${dbName}`, {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //MIDDLEWARE
 app.use(
   session({
-    secret: "basic-auth-secret",
+    secret: process.env.SESSION_SECRET,
     // cookie: { maxAge: 3600000 * 1 },	// 1 hour
     resave: true,
     saveUninitialized: false,

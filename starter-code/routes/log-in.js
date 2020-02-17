@@ -2,6 +2,7 @@ const express = require("express");
 const logInRouter = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("./../models/users");
+
 logInRouter.post("/",(req,res,next) => {
     const {username , password} = req.body;
     if (password === "" || username === ""){

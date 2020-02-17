@@ -12,30 +12,31 @@ function isLoggedIn(req, res, next) {
   }
 
   userInterfaceRouter.get("/", isLoggedIn, (req, res) => {
-    res.render("user-interface");
+    const { _id } = req.session.currentUser;
+
+    User.findById({_id})
+    .then((loggedInUser) => {
+      
+      res.render("user-interface",{loggedInUser});
+    }).catch((err) => {
+      console.log(err);
+    });
+    
+    
   });
 
 
-// userInterfaceRouter.use((req,res,next) => {
-//     if (req.session.currentUser) {
-//         next();
-//     } 
-//     else  {
-//         res.redirect("/login");
-//     }
-// });
-// userInterfaceRouter
-//     .get('/', (req,res,next) => {
-//         res.render('user-interface')
-//     });
 
 
 userInterfaceRouter
-    .post('/', (req, res, next) => {
-        const {postContent , image_url , currentUser} = req.body;
+    .post('/', isLoggedIn ,(req, res, next) => {
+      const { _id } = req.session.currentUser;
+
+      
+        const {postContent , image_url} = req.body;
 
 
-        Post.create({postContent: postContent, userId: currentUser._id })
+        Post.create({postContent: postContent, postImg_url: image_url, userId: {_id} })
         .then((createdPost) => {
               res.redirect("user-interface");           
         }).catch((err) => {
@@ -47,12 +48,7 @@ userInterfaceRouter
     });
 
 
-userInterfaceRouter.get("/logout", (req, res, next) => {
-    req.session.destroy((err) => {
-      // cannot access session here
-      res.render("log-in");
-    });
-  });
+
 
 
 

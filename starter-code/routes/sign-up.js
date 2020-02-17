@@ -41,9 +41,18 @@ signUpRouter.post("/",(req,res,next) => {
                         
                         User.create({userName: username , password:hashedPassword , cohortDate : cohortFromDb._id})
                         .then((createdUser) => {
-                            req.session.currentUser = createdUser;
-                              res.redirect("user-interface");           
-                        }).catch((err) => {
+                            const cohortMembers=cohortFromDb.members;
+                            cohortMembers.push(createdUser._id);
+                            Cohort.updateOne({_id :cohortFromDb._id }, {$set:{members : cohortMembers}})
+                            .then((result) => {
+                                req.session.currentUser = createdUser;
+                              res.redirect("user-interface");    
+                            }).catch((err) => {
+                                console.log(err);
+                            });
+                                    
+                        })
+                        .catch((err) => {
                             console.log(err);
                             res.render("sign-up", {errorMessage : "Error while creating the new user"})
                         });

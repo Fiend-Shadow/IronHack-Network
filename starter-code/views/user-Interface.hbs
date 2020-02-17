@@ -1,5 +1,4 @@
 
-<<<<<<< HEAD
 <h1>User interface view</h1>
 
 
@@ -43,26 +42,9 @@
 
 
 
-<a href="/logout">Logout</a>
-=======
-<header class="main-header">
-    <a href="index"> 
-        <img src="/images/ironhack-logo-150x150.png" alt="IronHack Logo" class="logo-img">
-    </a>
-</header>
 
+<form action='/log-out' method='GET'>
 
-<h1>User interface view</h1>
-<div>{{userdata.userName}}</div>
-<div>{{userdata.isAdmin}}</div>
-<img src="{{userdata.image_url}}" alt="userImage">
-{{#each userdata.links}}
-<a href="{{this.url}}"></a>
-{{/each}}
-<a href="/logout">Logout</a>
-{{!-- <form action='/user-interface' method='POST'>
-  <label for=''>postContent</label>
-  <input type='text' name='postContent'>
-  <button type='submit'>Submit</button>
-</form> --}}
->>>>>>> c75b08b1a9b62e7534ef20e2c08a54f879c469a3
+  
+  <button type='submit'>log out</button>
+</form>

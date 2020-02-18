@@ -1,45 +1,61 @@
 
-<h1>User interface view</h1>
+<header class="main-header">
+    <a href="index"> 
+        <img src="/images/ironhack-logo-150x150.png" alt="IronHack Logo" class="logo-img">
+    </a>
 
-
-
-<div>{{data.user.userName}}</div>
-
-<img src="{{data.user.image_url}}" alt="userImage">
-
-<ul>
-    {{#each data.user.links}}
-        <li><a href="{{this.url}}">{{this.description}}</a></li>
-    {{/each}}
-</ul>
-{{#each allPosts}}
-<p>
-  {{#each this}}
-      {{this}}
-  {{/each}}
-</p>
-{{/each}}
-{{!-- post Form --}}
-<form action='/user-interface' method='POST'>
-
-  <label for=''>postContent</label>
-  <input type='text' name='postContent'>
-
-  <button type="submit">Add photo</button>
-
-  <button type='submit'>Submit</button>
-</form>
-{{#if errorMessage}}
-<p>{{errorMessage}}</p>
-{{/if}}
-
-
-
-
-
-
-<form action='/log-out' method='GET'>
-
+    <form action='/log-out' method='GET'>
   
   <button type='submit'>log out</button>
 </form>
+
+
+</header>
+
+
+
+
+{{!-- post Form --}}
+<form action='/user-interface' method='POST' id="postingForm">
+
+  <label for=''>postContent</label>
+  <input type='text' name='postContent' class="inputB">
+
+  <button type="submit" class = "postButtons">Add photo</button>
+
+  <button type='submit' class = "postButtons">Submit</button>
+<br>
+<br>
+</form>
+
+
+{{#if errorMessage}}
+<p id="error">{{errorMessage}}</p>
+{{/if}}
+
+
+<div id = "postContainer">
+{{#each allPosts}}
+  {{#each this}}
+    <div id="posts"> 
+      <span class="userPost">{{this.userId.userName}} :</span> 
+      <span class="postContent">{{this.postContent}}</span>
+      <br>
+      </div>
+  {{/each}}
+{{/each}}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

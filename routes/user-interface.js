@@ -47,7 +47,7 @@ userInterfaceRouter.post('/profile',isLoggedIn, (req, res, next) => {
 
 });
 
-  userInterfaceRouter.get("/", isLoggedIn, (req, res) => {
+  userInterfaceRouter.get("/", isLoggedIn, (req, res,next) => {
 
     const { _id } = req.session.currentUser;
 

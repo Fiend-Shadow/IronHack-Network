@@ -1,0 +1,27 @@
+<h1>User Profile</h1>
+<div>
+User Name: {{loggedUser.userName}}
+</div>
+<div>
+    User Image: <img src="{{{loggedUser.image_url}}}" alt="">
+</div>
+<div>
+    <div>User's links</div>
+        {{#each loggedUser.links}}
+            <div> 
+                {{this.description}} : <a href="{{this.url}}"></a>
+            </div>
+        {{/each}}
+</div>
+<div>Add a link</div>
+<form action="/user-interface/profile" method="Post">
+      <label for=''>Url link</label>
+      <input type='text' name='urlLink'>
+      <label for=''>Url description</label>
+      <input type='text' name='descriptionLink'>
+</form>
+<div>
+    {{#each loggedUser.postIds}}
+    <p>{{this.postContent}}</p>
+    {{/each}}
+</div>

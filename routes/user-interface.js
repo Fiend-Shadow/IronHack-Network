@@ -5,6 +5,7 @@ const User = require ('./../models/users');
 const Post = require ('./../models/posts');
 const Cohort = require ('./../models/cohorts');
 
+const userProfileRouter = require ('./user-profile');
 const cohortMembers = require("./cohorot-members");
 
 
@@ -13,6 +14,10 @@ const cohortMembers = require("./cohorot-members");
 
 
 userInterfaceRouter.use("/cohort-members",cohortMembers);
+
+// *     /user-interface/profile
+userInterfaceRouter.use('/profile', userProfileRouter);
+
 
 function isLoggedIn(req, res, next) {
     if (req.session.currentUser) next();

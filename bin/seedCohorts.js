@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Cohort = require("./../models/cohorts");
 
-const dbName = "IronHack-Network";
+require("dotenv").config();
 
 const cohorts = [{
         cohort_name: "WebDev",
@@ -28,7 +28,7 @@ cohort_date:"2020-04-01",
 members:[ ]   
 }]
 
-mongoose.connect(`mongodb://localhost/${dbName}`, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
 .then( () =>{
     
   const pr =  Cohort.create(cohorts);

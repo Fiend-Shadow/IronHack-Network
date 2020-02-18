@@ -13,13 +13,14 @@ User Name: {{loggedUser.userName}}
             </div>
         {{/each}}
 </div>
-<div>Add a link</div>
-<form action="/user-interface/profile" method="Post">
+<form action="/user-interface/profile/" method="Post">
       <label for=''>Url link</label>
       <input type='text' name='urlLink'>
       <label for=''>Url description</label>
       <input type='text' name='descriptionLink'>
+      <button type="submit">Add a Link</button>
 </form>
+
 <div>
     {{#each loggedUser.postIds}}
     <p>{{this.postContent}}</p>

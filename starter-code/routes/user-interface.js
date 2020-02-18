@@ -1,6 +1,8 @@
 const express = require('express');
 const userInterfaceRouter = express.Router();
 
+
+
 const User = require ('./../models/users');
 const Post = require ('./../models/posts');
 const Cohort = require ('./../models/cohorts');
@@ -8,74 +10,60 @@ const Cohort = require ('./../models/cohorts');
 
 function isLoggedIn(req, res, next) {
     if (req.session.currentUser) next();
-<<<<<<< HEAD
-    else res.redirect("/login");
-  }
-
-  userInterfaceRouter.get("/", isLoggedIn, (req, res) => {
-    res.render("user-interface");
-  });
-
-
-=======
     else res.redirect("/log-in");
   }
   userInterfaceRouter.get("/", isLoggedIn, (req, res) => {
-    res.render("user-interface");
+    const { _id } = req.session.currentUser;
+    console.log("_id : ",_id);
+    User.findById({_id})
+    .then((loggedInUser) => {
+      console.log("loggedInUser :", loggedInUser)
+      const cohortDate = loggedInUser.cohortDate;
+      console.log("cohortDate :", cohortDate)
+      Cohort.findOne({_id:cohortDate})
+      .then((currentCohort) => {
+          console.log("currentCohort : ", currentCohort);
+        let colleagues = currentCohort.members;
+           console.log("colleagues ", colleagues);
+        const colleaguePrs = colleagues.map((oneCollegue)=>{
+         return Post.find({userId : oneCollegue}).populate("userId")
+          // .then((postedByUserId) => {
+          //   const {postContent , postImg_url} = postedByUserId;
+          //   const data = {user:loggedInUser ,posts:{postContent , postImg_url} }
+          // })
+        })
+        const whenAllDonePr= Promise.all(colleaguePrs)
+        return whenAllDonePr
+      }) 
+      .then(allPosts=>{
+        console.log(allPosts);
+        res.render("user-interface", {allPosts});
+      })
+    }).catch((err) => {
+      console.log(err);
+    });
   });
->>>>>>> c75b08b1a9b62e7534ef20e2c08a54f879c469a3
-// userInterfaceRouter.use((req,res,next) => {
-//     if (req.session.currentUser) {
-//         next();
-//     } 
-//     else  {
-//         res.redirect("/login");
-//     }
-// });
-<<<<<<< HEAD
-
-=======
->>>>>>> c75b08b1a9b62e7534ef20e2c08a54f879c469a3
-// userInterfaceRouter
-//     .get('/', (req,res,next) => {
-//         res.render('user-interface')
-//     });
-<<<<<<< HEAD
-
-
 userInterfaceRouter
-    .post('/', (req, res, next) => {
-        const {postContent , image_url , currentUser} = req.body;
-
-
-        Post.create({postContent: postContent, userId: currentUser._id })
+    .post('/', isLoggedIn ,(req, res, next) => {
+      const { _id } = req.session.currentUser;
+        const {postContent , image_url} = req.body;
+        Post.create({postContent: postContent, postImg_url: image_url, userId: {_id} })
         .then((createdPost) => {
-              res.redirect("user-interface");           
+          const userIdFormCreatedPost= createdPost.userId;
+          User.findById({_id: userIdFormCreatedPost})
+          .then((userPosting) => {
+            const postForiegnKey = userPosting.postIds;
+            postForiegnKey.push(createdPost._id);
+            User.updateOne({_id:userPosting._id}, {$set: {postIds:postForiegnKey}})
+            .then((result) => {
+              res.redirect("user-interface"); 
+            })
+          }).catch((err) => {
+          });
         }).catch((err) => {
             console.log(err);
             res.render("user-interface", {errorMessage : "Error while creating the new post"})
         });
-
-
     });
-
-=======
-// userInterfaceRouter
-//     .post('/', (req, res, next) => {
-//     });
->>>>>>> c75b08b1a9b62e7534ef20e2c08a54f879c469a3
-userInterfaceRouter.get("/logout", (req, res, next) => {
-    req.session.destroy((err) => {
-      // cannot access session here
-      res.render("log-in");
-    });
-  });
-<<<<<<< HEAD
-
-
-
-
 module.exports = userInterfaceRouter;
-=======
-module.exports = userInterfaceRouter;
->>>>>>> c75b08b1a9b62e7534ef20e2c08a54f879c469a3
+

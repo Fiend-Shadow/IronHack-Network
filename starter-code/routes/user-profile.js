@@ -1,9 +1,9 @@
 const express = require('express');
 const userProfileRouter = express.Router();
 
-userProfileRouter.get('/', (req,res,next) => {
-    console.log(userprofileGET)
-    res.render('user-profile');
+
+userProfileRouter.use('/', (req, res, next) => {
+    res.render('user-profile')
 })
 
 

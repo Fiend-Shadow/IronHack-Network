@@ -15,6 +15,12 @@ function isLoggedIn(req, res, next) {
 
 /////    NESTED ROUTERS     /////
 
+userInterfaceRouter.use(function(req, res, next) {
+  console.log('BANANA')
+  next();
+  
+})
+
 // *     /user-interface/profile
 userInterfaceRouter.use('/profile', userProfileRouter);
 

@@ -41,11 +41,12 @@ signUpRouter.post("/",(req,res,next) => {
                         
                         User.create({userName: username , password:hashedPassword , cohortDate : cohortFromDb._id})
                         .then((createdUser) => {
+                            req.session.currentUser = createdUser;
                             const cohortMembers=cohortFromDb.members;
                             cohortMembers.push(createdUser._id);
                             Cohort.updateOne({_id :cohortFromDb._id }, {$set:{members : cohortMembers}})
                             .then(() => {
-                                req.session.currentUser = createdUser;
+                                
                               res.redirect("/user-interface");    
                             }).catch((err) => {
                                 console.log(err);

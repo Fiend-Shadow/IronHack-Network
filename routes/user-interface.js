@@ -5,18 +5,10 @@ const User = require ('./../models/users');
 const Post = require ('./../models/posts');
 const Cohort = require ('./../models/cohorts');
 
-const userProfileRouter = require ('./user-profile');
-const cohortMembers = require("./cohorot-members");
 
 
 
 
-
-
-userInterfaceRouter.use("/cohort-members",cohortMembers);
-
-// *     /user-interface/profile
-userInterfaceRouter.use('/profile', userProfileRouter);
 
 
 function isLoggedIn(req, res, next) {
@@ -26,6 +18,34 @@ function isLoggedIn(req, res, next) {
 
 
 
+  userInterfaceRouter.get("/cohort-members",isLoggedIn, (req,res,next) => {
+    res.render("cohorot-members")
+  });
+  // *     /user-interface/profile
+  userInterfaceRouter.get('/profile', isLoggedIn, (req, res, next) => {
+    const {_id} = req.session.currentUser;
+    console.log('inprofileRoute');
+    User.findById({_id}).populate("postIds")
+        .then((loggedUser) => {
+            res.render("user-profile", {loggedUser});
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
+userInterfaceRouter.post('/profile',isLoggedIn, (req, res, next) => {
+  const {_id} = req.session.currentUser;
+  const {urlLink, descriptionLink} = req.body;
+  User.findById({_id})
+  .then((currentUserUpdates) => {
+      let linkFromDb = currentUserUpdates.links;
+      
+  }).catch((err) => {
+      
+  });
+
+});
 
   userInterfaceRouter.get("/", isLoggedIn, (req, res) => {
 

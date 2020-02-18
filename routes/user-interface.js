@@ -8,38 +8,50 @@ const Cohort = require ('./../models/cohorts');
 
 function isLoggedIn(req, res, next) {
     if (req.session.currentUser) next();
-    else res.redirect("/login");
+    else res.redirect("/log-in");
   }
 
   userInterfaceRouter.get("/", isLoggedIn, (req, res) => {
+
     const { _id } = req.session.currentUser;
+
+    console.log("_id : ",_id);
 
     User.findById({_id})
     .then((loggedInUser) => {
+      console.log("loggedInUser :", loggedInUser)
+
       const cohortDate = loggedInUser.cohortDate;
-      
+      console.log("cohortDate :", cohortDate)
+
       Cohort.findOne({_id:cohortDate})
       
       .then((currentCohort) => {
       
-
+          console.log("currentCohort : ", currentCohort);
+          
         let colleagues = currentCohort.members;
+           console.log("colleagues ", colleagues);
            
-        colleagues.forEach((m)=>{
+        const colleaguePrs = colleagues.map((oneCollegue)=>{
         
-          Post.find({userId : m})
-        
-          .then((postedByUserId) => {
-        
-            const {postContent , postImg_url} = postedByUserId;
-        
-            res.render("user-interface",{user:loggedInUser, posts:{postContent,postImg_url} });
-        
-          })
+         return Post.find({userId : oneCollegue}).populate("userId")
+          
+          // .then((postedByUserId) => {
+          //   const {postContent , postImg_url} = postedByUserId;
+          //   const data = {user:loggedInUser ,posts:{postContent , postImg_url} }
+          // })
         
         })
+
+        const whenAllDonePr= Promise.all(colleaguePrs)
+        return whenAllDonePr
       
       }) 
+      .then(allPosts=>{
+        console.log(allPosts);
+        res.render("user-interface", {allPosts});
+      })
     }).catch((err) => {
       console.log(err);
     });

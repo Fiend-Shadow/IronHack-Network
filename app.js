@@ -11,7 +11,7 @@ const hbs = require("hbs");
 // console.log('in dev');
 
 
-const router = require('./routes/index');
+const router = require("./routes/index");
 
 
 require("dotenv").config();

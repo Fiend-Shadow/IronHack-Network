@@ -23,3 +23,36 @@ footer{
 .logo-img{
   height: 100%;
 }
+
+.signUpForm{
+  position: relative;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#welcomeImage{
+  width:50%;
+  margin-bottom: 1.7em;
+}
+
+#mainFooter{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  color:white;
+  align-content: center;
+  padding-top: 7%;
+}
+
+#contactFooter{
+  text-decoration: none;
+  color: white;
+}
+
+.inputB{
+  border: 0.5px solid grey;
+  border-radius: 10%;
+}

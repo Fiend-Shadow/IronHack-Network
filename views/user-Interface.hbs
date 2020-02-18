@@ -3,17 +3,22 @@
 
 
 
-<div>{{loggedInUser.userName}}</div>
+<div>{{data.user.userName}}</div>
 
-<img src="{{loggedInUser.image_url}}" alt="userImage">
+<img src="{{data.user.image_url}}" alt="userImage">
 
 <ul>
-    {{#each user.links}}
+    {{#each data.user.links}}
         <li><a href="{{this.url}}">{{this.description}}</a></li>
     {{/each}}
 </ul>
-
-
+{{#each allPosts}}
+<p>
+  {{#each this}}
+      {{this}}
+  {{/each}}
+</p>
+{{/each}}
 {{!-- post Form --}}
 <form action='/user-interface' method='POST'>
 

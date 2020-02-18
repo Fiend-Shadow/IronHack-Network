@@ -78,9 +78,11 @@ footer{
 }
 
 #postingForm{
-  padding-top: 3%;
+  padding: 3% 3%;
   background-color: rgba(175, 173, 173, 0.473);
-  padding-left: 4%;
+  
+  
+
 }
 
 #postContainer{
@@ -99,3 +101,7 @@ footer{
 .main-header form button{
   color:white;
 }
+#postingId{
+  width: 100%;
+}
+

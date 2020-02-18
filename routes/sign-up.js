@@ -15,12 +15,12 @@ signUpRouter.post("/",(req,res,next) => {
         return;
     }
 
-    if (zxcvbn(password).score < 2) {
-        res.render("sign-up", {
-          errorMessage: "Password too weak, try again"
-        });
-        return;
-    }
+    // if (zxcvbn(password).score < 2) {
+    //     res.render("sign-up", {
+    //       errorMessage: "Password too weak, try again"
+    //     });
+    //     return;
+    // }
 
     User.findOne({userName: username})
     .then(user => {

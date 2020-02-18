@@ -1,6 +1,6 @@
 
 <header class="main-header">
-    <a href="index"> 
+    <a href="user-interface"> 
         <img src="/images/ironhack-logo-150x150.png" alt="IronHack Logo" class="logo-img">
     </a>
 
@@ -18,12 +18,12 @@
 {{!-- post Form --}}
 <form action='/user-interface' method='POST' id="postingForm">
 
-  <label for=''>postContent</label>
-  <input type='text' name='postContent' class="inputB">
+  
+  <input type='text' name='postContent' class="inputB" onfocus="this.value=''" value="What is in your mind" id="postingId">
 
   <button type="submit" class = "postButtons">Add photo</button>
 
-  <button type='submit' class = "postButtons">Submit</button>
+  <button type='submit' class = "postButtons">Post</button>
 <br>
 <br>
 </form>
@@ -46,7 +46,11 @@
 {{/each}}
 </div>
 
+<form action='/user-interface/cohort-members' method='GET'>
 
+ 
+  <button type='submit'>Cohort Colleagues</button>
+</form>
 
 
 

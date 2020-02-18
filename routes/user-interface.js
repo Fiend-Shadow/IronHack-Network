@@ -5,11 +5,22 @@ const User = require ('./../models/users');
 const Post = require ('./../models/posts');
 const Cohort = require ('./../models/cohorts');
 
+const cohortMembers = require("./cohorot-members");
+
+
+
+
+
+
+userInterfaceRouter.use("/cohort-members",cohortMembers);
 
 function isLoggedIn(req, res, next) {
     if (req.session.currentUser) next();
     else res.redirect("/log-in");
   }
+
+
+
 
   userInterfaceRouter.get("/", isLoggedIn, (req, res) => {
 

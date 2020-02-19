@@ -134,25 +134,19 @@ userInterfaceRouter.get("/profile/delete/:id", isLoggedIn, (req,res,next) => {
   userInterfaceRouter.get("/", isLoggedIn, (req, res,next) => {
 
     const { _id } = req.session.currentUser;
-
-    console.log("_id : ",_id);
+    let loggedUser;
 
     User.findById({_id})
     .then((loggedInUser) => {
-      console.log("loggedInUser :", loggedInUser)
-
+      loggedUser= loggedInUser;
       const cohortDate = loggedInUser.cohortDate;
-      console.log("cohortDate :", cohortDate)
 
       Cohort.findOne({_id:cohortDate})
       
       .then((currentCohort) => {
-      
-          console.log("currentCohort : ", currentCohort);
+    
           
-        let colleagues = currentCohort.members;
-           console.log("colleagues ", colleagues);
-           
+        let colleagues = currentCohort.members;  
         const colleaguePrs = colleagues.map((oneCollegue)=>{
         
          return Post.find({userId : oneCollegue}).populate("userId")
@@ -169,11 +163,9 @@ userInterfaceRouter.get("/profile/delete/:id", isLoggedIn, (req,res,next) => {
       
       }) 
       .then(allPosts=>{
-        console.log('-------------------------');
-        
-        console.log('allPosts',allPosts);
         allPosts.reverse();
-        res.render("user-interface", {allPosts});
+        // res.render("user-interface", {allPosts});
+        res.render("user-profile", {loggedUser});
       })
     }).catch((err) => {
       console.log(err);

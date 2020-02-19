@@ -26,10 +26,10 @@
 </div>
 <div class="row">
     <div class="col-sm-3"></div>
-<div class='col-sm-6'>
+<div class='col-sm-6 post-edit'>
 
-   {{#each admin.postIds}}
-        <p>{{userName}} : {{postContent}}</p>
+   {{#each adminUser.postIds}}
+        <p id="admin-posts"> - {{this.postContent}}</p>
    {{/each}}
 
 </div>

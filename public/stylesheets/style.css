@@ -148,3 +148,13 @@ footer{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding: 2% 2%;
 }
+
+.post-edit{
+  margin: 2% 5%;
+  
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 2% 2%;
+}
+#admin-posts{
+  padding-bottom: 2%;
+}

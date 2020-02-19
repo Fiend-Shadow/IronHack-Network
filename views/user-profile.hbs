@@ -1,9 +1,9 @@
 
 <header class="main-header">
-    <a href="user-interface"> 
+    <a href="/user-interface"> 
         <img src="/images/ironhack-logo-150x150.png" alt="IronHack Logo" class="logo-img">
     </a>
-
+    </a><button><a href="#"></a>{{loggedUser.userName}}</a></button>
     <form action='/log-out' method='GET'>
   
   <button type='submit'>log out</button>
@@ -12,17 +12,16 @@
 
 </header>
 
-<div>
-User Name: {{loggedUser.userName}}
-</div>
-<div>
-    User Image: <img src="{{loggedUser.image_url}}" alt="">
-</div>
+
+ 
+
 <div>
     <div>User's links</div>
         {{#each loggedUser.links}}
             <div> 
-                {{this.description}} : <a href="{{this.url}}"></a>
+                {{this.description}} : <a href="{{this.url}}" target="_blank"> your {{this.description}}</a><br>
+                <a href="/user-interface/profile/delete/{{this._id}}"><button>delete</button></a>
+                <a href="/user-interface/profile/edit"><button>edit</button></a>
             </div>
         {{/each}}
 </div>

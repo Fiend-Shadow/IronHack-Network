@@ -19,12 +19,19 @@ function isLoggedIn(req, res, next) {
 
 
   userInterfaceRouter.get("/cohort-members",isLoggedIn, (req,res,next) => {
-    res.render("cohorot-members")
+    Cohort.findOne({members : req.session.currentUser}).populate("members")
+    .then((theCohort) => {
+      res.render("cohorot-members", {theCohort});
+    }).catch((err) => {
+      console.log(err);
+    });
+
+    
   });
   // *     /user-interface/profile
   userInterfaceRouter.get('/profile', isLoggedIn, (req, res, next) => {
     const {_id} = req.session.currentUser;
-    console.log('inprofileRoute');
+    
     User.findById({_id}).populate("postIds")
         .then((loggedUser) => {
             res.render("user-profile", {loggedUser});
@@ -34,18 +41,95 @@ function isLoggedIn(req, res, next) {
         });
 });
 
+// userInterfaceRouter.post('/profile',isLoggedIn, (req, res, next) => {
+//   const {_id} = req.session.currentUser;
+//   const {urlLink, descriptionLink} = req.body;
+//   User.findById({_id})
+//   .then((currentUserUpdates) => {
+//       let linkFromDb = currentUserUpdates.links;
+//       linkFromDb.push({url: urlLink, description: descriptionLink});
+//         User.updateOne({_id: _id},{$set:{links:linkFromDb}})
+//         .then(()=>{
+//           res.redirect("/user-interface/profile");
+//         });
+//   }).catch((err) => {
+//       console.log(err);
+//   });
+
+// });
+
 userInterfaceRouter.post('/profile',isLoggedIn, (req, res, next) => {
   const {_id} = req.session.currentUser;
   const {urlLink, descriptionLink} = req.body;
-  User.findById({_id})
-  .then((currentUserUpdates) => {
-      let linkFromDb = currentUserUpdates.links;
-      
+
+  const newLink = {
+    url: urlLink,
+    description:descriptionLink
+  }
+  
+  
+  User.findByIdAndUpdate({_id}, {$push: {links: newLink}},{new:true})
+  .then((userUpdated) => {
+    
+    
+    res.redirect("/user-interface/profile");
   }).catch((err) => {
-      
+    console.log(err);
+    
   });
 
+
 });
+
+// userInterfaceRouter.get("/profile/delete/:id", isLoggedIn, (req,res,next) => {
+//   const {_id} = req.session.currentUser;
+//     const deletedLinkId = req.params;
+//     let linksArr;
+//     User.findById({_id})
+//     .then((findedUser) => {
+//       console.log(findedUser)
+//       for (let i =0 ; i <findedUser.links.length ; i++){
+//         if (findedUser.links[i]._id === deletedLinkId){
+//           findedUser.links.splice(i,1);
+//           linksArr = findedUser.links;
+//         }
+//         return linksArr;
+//       }
+//       User.findByIdAndUpdate({_id},{$set : {links : linksArr}},{new :true})
+//       .then((updatedUser) => {
+//              console.log("updated user", updatedUser);
+             
+//       })
+//       res.redirect("user-interface/profile");
+//     }).catch((err) => {
+//       console.log(err);
+//     });
+
+// })
+
+userInterfaceRouter.get("/profile/delete/:id", isLoggedIn, (req,res,next) => {
+  const {_id} = req.session.currentUser;
+    const deletedLinkId = req.params;
+    let linkToDelete;
+    User.findById(_id)
+    .then((user)=>{
+      linkToDelete = user.links.filter((oneLink)=>{
+
+        return oneLink._id == deletedLinkId.id
+      })
+      
+      
+      User.findByIdAndUpdate({_id}, {$pull: {links: linkToDelete[0]}})
+      .then((userUpdated) => {
+        
+        res.redirect("/user-interface/profile");
+      }).catch((err) => {
+        console.log(err);
+      });
+      
+    })
+})
+
 
   userInterfaceRouter.get("/", isLoggedIn, (req, res,next) => {
 
@@ -85,7 +169,10 @@ userInterfaceRouter.post('/profile',isLoggedIn, (req, res, next) => {
       
       }) 
       .then(allPosts=>{
-        console.log(allPosts);
+        console.log('-------------------------');
+        
+        console.log('allPosts',allPosts);
+        allPosts.reverse();
         res.render("user-interface", {allPosts});
       })
     }).catch((err) => {

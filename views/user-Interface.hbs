@@ -1,8 +1,12 @@
 
 <header class="main-header">
-    <a href="user-interface"> 
+    <a href="/user-interface"> 
         <img src="/images/ironhack-logo-150x150.png" alt="IronHack Logo" class="logo-img">
     </a>
+
+
+
+ 
 
     <form action='/log-out' method='GET'>
   
@@ -14,7 +18,12 @@
 
 
 
+<form action='/user-interface/cohort-members' method='GET'>
 
+ 
+  <button type='submit'>Cohort Colleagues</button>
+</form>
+<button><a href="/user-interface/profile">Profile</a></button>
 {{!-- post Form --}}
 <form action='/user-interface' method='POST' id="postingForm">
 
@@ -45,21 +54,3 @@
   {{/each}}
 {{/each}}
 </div>
-
-<form action='/user-interface/cohort-members' method='GET'>
-
- 
-  <button type='submit'>Cohort Colleagues</button>
-</form>
-
-
-
-<a href="/user-interface/profile"> <button>profile</button></a>
-
-
-
-
-
-
-
-

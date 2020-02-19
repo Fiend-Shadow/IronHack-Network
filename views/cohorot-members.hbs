@@ -1,0 +1,24 @@
+
+<header class="main-header">
+    <a href="/user-interface"> 
+        <img src="/images/ironhack-logo-150x150.png" alt="IronHack Logo" class="logo-img">
+    </a>
+
+
+
+ 
+
+    <form action='/log-out' method='GET'>
+  
+  <button type='submit'>log out</button>
+</form>
+
+
+</header>
+
+
+<ul>
+    {{#each theCohort.members}}
+        <li><a href="#">{{this.userName}}</a></li>
+    {{/each}}
+</ul>

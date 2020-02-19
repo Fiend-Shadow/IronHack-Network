@@ -31,9 +31,9 @@
 <form action="/user-interface/profile/" method="Post" id="links-adding">
     <h3>Add a new Link</h3>
       <label for=''>Url link</label>
-      <input type='text' name='urlLink'>
+      <input type='text' name='urlLink' class="inputB">
       <label for=''>Url description</label>
-      <input type='text' name='descriptionLink'>
+      <input type='text' name='descriptionLink' class="inputB">
       <button type="submit" class = "postButtons">Add a Link</button>
 </form>
 
@@ -42,5 +42,7 @@
     <br>
     {{#each loggedUser.postIds}}
     <p> - {{this.postContent}}</p>
+    <a href="/user-interface/profile/deletePost/{{this._id}}"><button class = "postButtons">delete</button></a>
+    <a href="/user-interface/profile/editPost/{{this._id}}"> <button class = "postButtons"> edit</button> </a>
     {{/each}}
 </div>

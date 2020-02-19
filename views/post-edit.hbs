@@ -16,10 +16,10 @@
 
 </header>
 
- <form action="/user-interface/profile/edit/{{linkToEdit.0._id}}" method="post" >
+ <form action="/user-interface/profile/edit/{{linkToEdit.0._id}}" method="post" id="post-edit">
         <label for="">url link</label>
-        <input type="text" name="urlLink" value="{{linkToEdit.0.url}}" onfocus="this.value=''">
+        <input type="text" name="urlLink" value="{{linkToEdit.0.url}}" onfocus="this.value=''" class="inputB">
         <label for="">url description</label>
-        <input type="text" name="descriptionLink" value="{{linkToEdit.0.description}}" onfocus="this.value=''">
-        <button type="submit">edit</button>
+        <input type="text" name="descriptionLink" value="{{linkToEdit.0.description}}" onfocus="this.value=''" class="inputB">
+        <button type="submit" class = "postButtons">edit</button> 
 </form>

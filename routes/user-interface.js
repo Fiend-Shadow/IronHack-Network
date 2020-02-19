@@ -236,7 +236,9 @@ userInterfaceRouter
 
 
 
+// userInterfaceRouter.get("/profile/deletePost/:id",isLoggedIn,(req,res,next) => {
 
+// });
 
 
 

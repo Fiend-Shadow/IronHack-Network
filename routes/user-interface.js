@@ -13,8 +13,12 @@ const Cohort = require ('./../models/cohorts');
 
 function isLoggedIn(req, res, next) {
     if (req.session.currentUser) next();
-    else res.redirect("/log-in");
-  }
+    else {
+      console.log('NOT LOGGED IN');
+        
+      res.redirect("/log-in")
+    };
+}
 
 
 

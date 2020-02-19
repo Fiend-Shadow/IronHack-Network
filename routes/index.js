@@ -5,6 +5,7 @@ const logInRouter = require("./log-in");
 const signUpRouter = require("./sign-up");
 const userInterfaceRouter = require("./user-interface");
 const logOutRouter = require("./log-out");
+const User = require("./../models/users");
 
 router.use("/log-in",logInRouter);
 
@@ -16,7 +17,14 @@ router.use("/log-out", logOutRouter)
 
 /* GET home page. */
 router.get('/',(req, res, next) => {
-  res.render("index");
+ const admin= User.findOne({isAdmin: true}).populate("postIds")
+  .then((adminUser) => {
+    return adminUser;
+  }).catch((err) => {
+    console.log(err);
+  });
+  
+  res.render("index",{admin});
 });
 
 

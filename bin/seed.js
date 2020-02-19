@@ -1,46 +1,16 @@
 const mongoose = require("mongoose");
 const User = require("./../models/users");
 
-const dbName = "IronHack-Network";
+
 
 const users = [{
-    userName: "David",
-    password: "David123",
-    isAdmin: false,
+    userName: "admin",
+    password: "$2b$12$V0arFBMTFXFKx9F5OOLubuzfh0FLck75F24jNh0fIJjQl8VdmRxr6",
+    isAdmin: true,
     links: [{url: "github.com", description: "my github"},{url: "gmail.com",description:"my gmail" }],
-    image_url: "https://media.giphy.com/media/QwmiazKyDlBH1sQVPU/giphy.gif"
-    
-},{
-    userName: "Tarek",
-    password: "Tarek123",
-    isAdmin: false,
-    links: [{url: "github.com", description: "my github"},{url: "gmail.com",description:"my gmail" }],
-    image_url: "https://media.giphy.com/media/QwmiazKyDlBH1sQVPU/giphy.gif"
-    
-},{
-    userName: "Valentin",
-    password: "Valentin123",
-    isAdmin: false,
-    links: [{url: "github.com", description: "my github"},{url: "gmail.com",description:"my gmail" }],
-    image_url: "https://media.giphy.com/media/QwmiazKyDlBH1sQVPU/giphy.gif"
-  
-},{
-    userName: "Val",
-    password: "Val123",
-    isAdmin: false,
-    links: [{url: "github.com", description: "my github"},{url: "gmail.com",description:"my gmail" }],
-    image_url: "https://media.giphy.com/media/QwmiazKyDlBH1sQVPU/giphy.gif"
-   
-},{
-    userName: "Chloe",
-    password: "Chloe123",
-    isAdmin: false,
-    links: [{url: "github.com", description: "my github"},{url: "gmail.com",description:"my gmail" }],
-    image_url: "https://media.giphy.com/media/QwmiazKyDlBH1sQVPU/giphy.gif"
-  
-}];
-
-mongoose.connect(`mongodb://localhost/${dbName}`, {useNewUrlParser: true, useUnifiedTopology: true})
+    image_url: "./images/logo-admin-png-7.png"
+}]
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
     .then( () =>{
         
       const pr =  User.create(users);

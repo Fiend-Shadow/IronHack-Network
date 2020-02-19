@@ -172,7 +172,7 @@ userInterfaceRouter.get("/profile/delete/:id", isLoggedIn, (req,res,next) => {
       }) 
       .then(allPosts=>{
         allPosts.reverse();
-        console.log(allPosts);
+        
         
         res.render("user-interface", {allPosts});
         // res.render("user-profile", {loggedUser});

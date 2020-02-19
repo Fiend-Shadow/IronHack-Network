@@ -7,7 +7,7 @@ const userSchema = new Schema(
       password: {type: String, required: true},
       isAdmin: {type: Boolean, default: false},
       links: [{url: String, description: String}],
-      image_url: {type: String, required: true , default: "./images/download.png"},
+      image_url: {type: String, required: true , default: "/images/download.png"},
       cohortDate: {type: Schema.Types.ObjectId, ref: "Cohort",required: true},
       postIds: [{type: Schema.Types.ObjectId, ref: "Post"}]
 

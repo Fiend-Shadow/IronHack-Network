@@ -1,9 +1,22 @@
-<h1>User Profile</h1>
+
+<header class="main-header">
+    <a href="user-interface"> 
+        <img src="/images/ironhack-logo-150x150.png" alt="IronHack Logo" class="logo-img">
+    </a>
+
+    <form action='/log-out' method='GET'>
+  
+  <button type='submit'>log out</button>
+</form>
+
+
+</header>
+
 <div>
 User Name: {{loggedUser.userName}}
 </div>
 <div>
-    User Image: <img src="{{{loggedUser.image_url}}}" alt="">
+    User Image: <img src="{{loggedUser.image_url}}" alt="">
 </div>
 <div>
     <div>User's links</div>

@@ -3,7 +3,7 @@
     <a href="/user-interface"> 
         <img src="/images/ironhack-logo-150x150.png" alt="IronHack Logo" class="logo-img">
     </a>
-    </a><button><a href="#"></a>{{loggedUser.userName}}</a></button>
+    <button><a href="#" style="text-decoration: none; color:white;">{{loggedUser.userName}}</a></button>
     <form action='/log-out' method='GET'>
   
   <button type='submit'>log out</button>
@@ -31,7 +31,7 @@
 <form action="/user-interface/profile/" method="Post" id="links-adding">
     <h3>Add a new Link</h3>
       <label for=''>Url link</label>
-      <input type='text' name='urlLink' class="inputB">
+      <input type='text' name='urlLink' class="inputB"><br>
       <label for=''>Url description</label>
       <input type='text' name='descriptionLink' class="inputB">
       <button type="submit" class = "postButtons">Add a Link</button>

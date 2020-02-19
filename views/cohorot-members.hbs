@@ -17,8 +17,7 @@
 </header>
 
 
-<ul>
+
     {{#each theCohort.members}}
-        <li><a href="#">{{this.userName}}</a></li>
+        <a href="/user-interface/member/{{this._id}}" id="members"> - {{this.userName}}</a><br>
     {{/each}}
-</ul>

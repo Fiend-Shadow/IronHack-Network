@@ -1,0 +1,33 @@
+<header class="main-header">
+    <a href="/user-interface"> 
+        <img src="/images/ironhack-logo-150x150.png" alt="IronHack Logo" class="logo-img">
+    </a>
+
+
+
+ 
+
+    <form action='/log-out' method='GET'>
+  
+  <button type='submit'>log out</button>
+</form>
+
+
+</header>
+
+
+<h2>{{colleague.userName}}</h2>
+
+<div class ="container1">
+<h3>Links</h3>
+{{#each colleague.links}}
+    <p> - {{this.description}} : {{this.url}}</p>
+{{/each}}
+</div>
+
+<div class ="container1">
+<h3>Posts</h3>
+{{#each colleague.postIds}}
+    <p> - {{this.postContent}}</p>
+{{/each}}
+</div>

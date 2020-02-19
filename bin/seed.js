@@ -9,7 +9,7 @@ const users = [{
     isAdmin: true,
     links: [{url: "github.com", description: "my github"},{url: "gmail.com",description:"my gmail" }],
     image_url: "./images/logo-admin-png-7.png",
-    cohortDate : 
+    
 }]
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
     .then( () =>{

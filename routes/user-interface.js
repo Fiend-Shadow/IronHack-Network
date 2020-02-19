@@ -233,7 +233,17 @@ userInterfaceRouter
 
     });
 
-
+userInterfaceRouter.get("/member/:id",(req,res,next) => {
+ const {id} = req.params;
+ 
+  User.findOne({_id:id}).populate("postIds")
+  .then((colleague) => {
+    console.log(colleague);
+      res.render("colleague",{colleague});
+  }).catch((err) => {
+    console.log(err);
+  });
+})
 
 
 // userInterfaceRouter.get("/profile/deletePost/:id",isLoggedIn,(req,res,next) => {

@@ -28,10 +28,45 @@ function isLoggedIn(req, res, next) {
 
     
   });
-  // *     /user-interface/profile
+
+  userInterfaceRouter.get("/profile/edit/:id", isLoggedIn, (req,res,next) => {
+      const {_id} = req.session.currentUser;
+      const editedLinkId = req.params;
+      let linkToEdit;
+      User.findById({_id})
+      .then((user) => {
+        linkToEdit = user.links.filter((oneLink)=>{
+          return oneLink._id == editedLinkId.id;
+        })
+      }).catch((err) => {
+        console.log(err);
+      });
+
+    res.render("post-edit");
+    // const {_id} = req.session.currentUser;
+    // const deletedLinkId = req.params;
+    // let linkToDelete;
+    // User.findById(_id)
+    // .then((user)=>{
+    //   linkToDelete = user.links.filter((oneLink)=>{
+
+    //     return oneLink._id == deletedLinkId.id
+    //   })
+      
+      
+    //   User.findByIdAndUpdate({_id}, {$pull: {links: linkToDelete[0]}})
+    //   .then((userUpdated) => {
+        
+    //     res.redirect("/user-interface/profile");
+    //   }).catch((err) => {
+    //     console.log(err);
+    //   });
+  });
+  
+
   userInterfaceRouter.get('/profile', isLoggedIn, (req, res, next) => {
     const {_id} = req.session.currentUser;
-    
+   
     User.findById({_id}).populate("postIds")
         .then((loggedUser) => {
             res.render("user-profile", {loggedUser});
@@ -41,22 +76,7 @@ function isLoggedIn(req, res, next) {
         });
 });
 
-// userInterfaceRouter.post('/profile',isLoggedIn, (req, res, next) => {
-//   const {_id} = req.session.currentUser;
-//   const {urlLink, descriptionLink} = req.body;
-//   User.findById({_id})
-//   .then((currentUserUpdates) => {
-//       let linkFromDb = currentUserUpdates.links;
-//       linkFromDb.push({url: urlLink, description: descriptionLink});
-//         User.updateOne({_id: _id},{$set:{links:linkFromDb}})
-//         .then(()=>{
-//           res.redirect("/user-interface/profile");
-//         });
-//   }).catch((err) => {
-//       console.log(err);
-//   });
 
-// });
 
 userInterfaceRouter.post('/profile',isLoggedIn, (req, res, next) => {
   const {_id} = req.session.currentUser;
@@ -81,31 +101,7 @@ userInterfaceRouter.post('/profile',isLoggedIn, (req, res, next) => {
 
 });
 
-// userInterfaceRouter.get("/profile/delete/:id", isLoggedIn, (req,res,next) => {
-//   const {_id} = req.session.currentUser;
-//     const deletedLinkId = req.params;
-//     let linksArr;
-//     User.findById({_id})
-//     .then((findedUser) => {
-//       console.log(findedUser)
-//       for (let i =0 ; i <findedUser.links.length ; i++){
-//         if (findedUser.links[i]._id === deletedLinkId){
-//           findedUser.links.splice(i,1);
-//           linksArr = findedUser.links;
-//         }
-//         return linksArr;
-//       }
-//       User.findByIdAndUpdate({_id},{$set : {links : linksArr}},{new :true})
-//       .then((updatedUser) => {
-//              console.log("updated user", updatedUser);
-             
-//       })
-//       res.redirect("user-interface/profile");
-//     }).catch((err) => {
-//       console.log(err);
-//     });
 
-// })
 
 userInterfaceRouter.get("/profile/delete/:id", isLoggedIn, (req,res,next) => {
   const {_id} = req.session.currentUser;
@@ -134,11 +130,11 @@ userInterfaceRouter.get("/profile/delete/:id", isLoggedIn, (req,res,next) => {
   userInterfaceRouter.get("/", isLoggedIn, (req, res,next) => {
 
     const { _id } = req.session.currentUser;
-    let loggedUser;
+    // let loggedUser;
 
     User.findById({_id})
     .then((loggedInUser) => {
-      loggedUser= loggedInUser;
+      // loggedUser= loggedInUser;
       const cohortDate = loggedInUser.cohortDate;
 
       Cohort.findOne({_id:cohortDate})
@@ -164,8 +160,10 @@ userInterfaceRouter.get("/profile/delete/:id", isLoggedIn, (req,res,next) => {
       }) 
       .then(allPosts=>{
         allPosts.reverse();
-        // res.render("user-interface", {allPosts});
-        res.render("user-profile", {loggedUser});
+        console.log(allPosts);
+        
+        res.render("user-interface", {allPosts});
+        // res.render("user-profile", {loggedUser});
       })
     }).catch((err) => {
       console.log(err);

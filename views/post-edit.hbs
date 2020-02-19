@@ -1,0 +1,25 @@
+
+<header class="main-header">
+    <a href="/user-interface"> 
+        <img src="/images/ironhack-logo-150x150.png" alt="IronHack Logo" class="logo-img">
+    </a>
+
+
+
+ 
+
+    <form action='/log-out' method='GET'>
+  
+  <button type='submit'>log out</button>
+</form>
+
+
+</header>
+
+ <form action="/user-interface/profile/edit/{{this._id}}" method="post" >
+        <label for="">url link</label>
+        <input type="text" name="urlLink" value="{{this.url}}" onfocus="this.value=''">
+        <label for="">url description</label>
+        <input type="text" name="descriptionLink" value="{{this.description}}" onfocus="this.value=''">
+        <button type="submit">edit</button>
+</form>

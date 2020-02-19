@@ -19,9 +19,12 @@
     <div>User's links</div>
         {{#each loggedUser.links}}
             <div> 
+                
                 {{this.description}} : <a href="{{this.url}}" target="_blank"> your {{this.description}}</a><br>
                 <a href="/user-interface/profile/delete/{{this._id}}"><button>delete</button></a>
-                <a href="/user-interface/profile/edit"><button>edit</button></a>
+                <a href="/user-interface/profile/edit/{{this._id}}"> <button> edit</button> </a>
+                
+               
             </div>
         {{/each}}
 </div>

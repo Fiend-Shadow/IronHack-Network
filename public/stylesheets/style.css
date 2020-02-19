@@ -58,7 +58,7 @@ footer{
 .inputB{
   border: 0.5px solid grey;
   border-radius: 10%;
-  background-color: #4FC7F9;
+  background-color: rgba(79, 198, 249, 0.212);
 }
 
 #posts{

@@ -1,0 +1,58 @@
+
+<header class="main-header">
+    <a href="/user-interface"> 
+        <img src="/images/ironhack-logo-150x150.png" alt="IronHack Logo" class="logo-img">
+    </a>
+
+
+
+ 
+
+    <form action='/log-out' method='GET'>
+  
+  <button type='submit'>log out</button>
+</form>
+
+
+</header>
+
+
+
+<form action='/user-interface/cohort-members' method='GET'>
+
+ 
+  <button type='submit'>Cohort Colleagues</button>
+</form>
+<button><a href="/user-interface/profile">Profile</a></button>
+{{!-- post Form --}}
+<form action='/user-interface' method='POST' id="postingForm">
+
+  
+  <input type='text' name='postContent' class="inputB" onfocus="this.value=''" value="What is in your mind" id="postingId">
+
+  <button type="submit" class = "postButtons">Add photo</button>
+
+  <button type='submit' class = "postButtons">Post</button>
+<br>
+<br>
+</form>
+
+
+{{#if errorMessage}}
+<p id="error">{{errorMessage}}</p>
+{{/if}}
+
+
+<div id = "postContainer">
+  
+    {{#each allPosts}}
+      {{#each this}}
+        <div id="posts"> 
+          <span class="userPost">{{this.userId.userName}} :</span> 
+          <span class="postContent">{{this.postContent}}</span>
+          <br>
+          </div>
+      {{/each}}
+    {{/each}}
+  
+</div>

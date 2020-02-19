@@ -14,8 +14,7 @@ const Cohort = require ('./../models/cohorts');
 function isLoggedIn(req, res, next) {
     if (req.session.currentUser) next();
     else {
-      console.log('NOT LOGGED IN');
-        
+       
       res.redirect("/log-in")
     };
 }
@@ -33,38 +32,47 @@ function isLoggedIn(req, res, next) {
     
   });
 
+
+  userInterfaceRouter.post("/profile/edit/:id", isLoggedIn , (req,res,next) => {
+    const {_id} = req.session.currentUser;
+    const linkAfterEditId = req.params;
+    const {urlLink, descriptionLink} = req.body;
+
+    let linkToEdit;
+    User.findById({_id})
+    .then((user) => {
+      linkToEdit = user.links.filter((oneLink)=>{
+        return oneLink._id == linkAfterEditId.id;
+      })
+      linkToEdit[0].url = urlLink;
+      linkToEdit[0].description = descriptionLink;
+      User.findByIdAndUpdate({_id} , {$set: {links : linkToEdit }}, {new:true})
+      .then (() => {
+        res.redirect("/user-interface/profile");
+      })
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  })
+
   userInterfaceRouter.get("/profile/edit/:id", isLoggedIn, (req,res,next) => {
-      const {_id} = req.session.currentUser;
-      const editedLinkId = req.params;
-      let linkToEdit;
-      User.findById({_id})
-      .then((user) => {
-        linkToEdit = user.links.filter((oneLink)=>{
-          return oneLink._id == editedLinkId.id;
-        })
-      }).catch((err) => {
+    const {_id} = req.session.currentUser;
+    const editedLinkId = req.params;
+    let linkToEdit;
+    User.findById({_id})
+    .then((user) => {
+      linkToEdit = user.links.filter((oneLink)=>{
+        return oneLink._id == editedLinkId.id;
+      })
+      
+      res.render("post-edit", {linkToEdit})
+      
+      })
+      .catch((err) => {
         console.log(err);
       });
-
-    res.render("post-edit");
-    // const {_id} = req.session.currentUser;
-    // const deletedLinkId = req.params;
-    // let linkToDelete;
-    // User.findById(_id)
-    // .then((user)=>{
-    //   linkToDelete = user.links.filter((oneLink)=>{
-
-    //     return oneLink._id == deletedLinkId.id
-    //   })
-      
-      
-    //   User.findByIdAndUpdate({_id}, {$pull: {links: linkToDelete[0]}})
-    //   .then((userUpdated) => {
-        
-    //     res.redirect("/user-interface/profile");
-    //   }).catch((err) => {
-    //     console.log(err);
-    //   });
+    
   });
   
 

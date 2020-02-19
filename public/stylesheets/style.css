@@ -106,3 +106,38 @@ footer{
   width: 100%;
 }
 
+#nav-above-posting{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: rgba(175, 173, 173, 0.473);
+}
+#nav-above-posting button a{
+  text-decoration: none;
+  color: white;
+}
+#nav-above-posting form button{
+  text-decoration: none;
+  color: white;
+}
+
+#links-container{
+  margin: 2% 2%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 2% 2%;
+}
+
+#links-adding{
+  margin: 2% 2%;
+  margin-top: 4% ;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 2% 2%;
+}
+
+
+#post-container{
+  margin: 2% 2%;
+  margin-top: 4% ;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 2% 2%;
+}

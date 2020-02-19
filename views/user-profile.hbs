@@ -15,29 +15,32 @@
 
  
 
-<div>
-    <div>User's links</div>
+<div id="links-container">
+   <h3>Your Links</h3>
         {{#each loggedUser.links}}
             <div> 
                 
                 {{this.description}} : <a href="{{this.url}}" target="_blank"> your {{this.description}}</a><br>
-                <a href="/user-interface/profile/delete/{{this._id}}"><button>delete</button></a>
-                <a href="/user-interface/profile/edit/{{this._id}}"> <button> edit</button> </a>
+                <a href="/user-interface/profile/delete/{{this._id}}"><button class = "postButtons">delete</button></a>
+                <a href="/user-interface/profile/edit/{{this._id}}"> <button class = "postButtons"> edit</button> </a>
                 
                
             </div>
         {{/each}}
 </div>
-<form action="/user-interface/profile/" method="Post">
+<form action="/user-interface/profile/" method="Post" id="links-adding">
+    <h3>Add a new Link</h3>
       <label for=''>Url link</label>
       <input type='text' name='urlLink'>
       <label for=''>Url description</label>
       <input type='text' name='descriptionLink'>
-      <button type="submit">Add a Link</button>
+      <button type="submit" class = "postButtons">Add a Link</button>
 </form>
 
-<div>
+<div id="post-container">
+    <h3>Your Posts</h3>
+    <br>
     {{#each loggedUser.postIds}}
-    <p>{{this.postContent}}</p>
+    <p> - {{this.postContent}}</p>
     {{/each}}
 </div>

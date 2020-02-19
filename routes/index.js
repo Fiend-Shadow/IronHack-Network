@@ -17,14 +17,14 @@ router.use("/log-out", logOutRouter)
 
 /* GET home page. */
 router.get('/',(req, res, next) => {
- const admin= User.findOne({isAdmin: true}).populate("postIds")
+User.findOne({isAdmin: true}).populate("postIds")
   .then((adminUser) => {
-    return adminUser;
+    console.log(adminUser);
+    res.render("index",{adminUser});
   }).catch((err) => {
     console.log(err);
   });
-  
-  res.render("index",{admin});
+
 });
 
 

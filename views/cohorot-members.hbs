@@ -16,8 +16,9 @@
 
 </header>
 
-
-
+<div id="cohort-mem"> 
+    <h3>Your Cohort Colleagues</h3>
     {{#each theCohort.members}}
         <a href="/user-interface/member/{{this._id}}" id="members"> - {{this.userName}}</a><br>
     {{/each}}
+</div>

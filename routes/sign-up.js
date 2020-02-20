@@ -2,13 +2,21 @@ const express = require("express");
 const signUpRouter = express.Router();
 const User = require("./../models/users");
 const Cohort = require("./../models/cohorts");
+const parser = require('../config/cloudinary');
 
 const bcrypt = require("bcrypt");
 const zxcvbn = require("zxcvbn");
 const saltRounds = 12;
 
-signUpRouter.post("/",(req,res,next) => {
+signUpRouter.post("/", parser.single('photo'), (req,res,next) => {
     const {username, password, cohort} = req.body;
+    let image_url;
+    if(req.file){
+
+         image_url = req.file.secure_url;
+    }else{
+        image_url = "https://cdn.guidingtech.com/media/assets/WordPress-Import/2012/10/Smiley-Thumbnail.png"
+    }
 
     if (password ==""|| username ==""){
         res.render("sign-up", {errorMessage: "Username and Password are requiered"});
@@ -39,7 +47,7 @@ signUpRouter.post("/",(req,res,next) => {
                     Cohort.findOne({cohort_name : cohortN ,cohort_date : cohortD})
                     .then((cohortFromDb) => {
                         
-                        User.create({userName: username , password:hashedPassword , cohortDate : cohortFromDb._id})
+                        User.create({userName: username , password:hashedPassword , cohortDate : cohortFromDb._id , image_url})
                         .then((createdUser) => {
                             req.session.currentUser = createdUser;
                             const cohortMembers=cohortFromDb.members;
